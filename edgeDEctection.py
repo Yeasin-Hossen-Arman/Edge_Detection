@@ -29,6 +29,18 @@ def Edge_detection(frame):
     #eroding image
     erode_img = cv.erode(dilate_img, (3,3), iterations=1)
     cv.imshow('Erode img',erode_img)
+    
+
+    #laplacian opearator for edge detection 
+    lap = cv.Laplacian(blur_img, cv.CV_64F)
+    lap = np.uint8(np.absolute(lap))
+    cv.imshow('laplacian edge detect', lap)
+
+    #sobel operation for edge detection
+    sobel_x = cv.Sobel(blur_img, cv.CV_64F, 1, 0)
+    sobel_y = cv.Sobel(blur_img, cv.CV_64F, 0, 1)
+    combine_sobel = cv.bitwise_or(sobel_x, sobel_y)
+    cv.imshow('edge detion by sobel operator', combine_sobel)
 
 #Edge cascade from 3,3
 # canny_img3 = cv.Canny(blur_img3,125,175)
